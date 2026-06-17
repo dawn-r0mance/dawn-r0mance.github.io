@@ -1,1 +1,556 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Personal website for Dawn R0mance, featuring selected work, background, and resume."
+    >
+    <title>Dawn R0mance | Personal Website</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4f7f8;
+        --surface: #12a36e;
+        --text: #1d2525;
+        --muted: #5b6668;
+        --accent: #0f766e;
+        --accent-dark: #104f4b;
+        --line: #d9ded9;
+        --shadow: 0 22px 70px rgba(29, 37, 37, 0.12);
+      }
 
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        background:
+          linear-gradient(135deg, rgba(15, 118, 110, 0.08), transparent 38%),
+          var(--bg);
+        color: var(--text);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        line-height: 1.6;
+      }
+
+      a {
+        color: var(--accent-dark);
+      }
+
+      a:hover {
+        color: var(--accent);
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 3px solid rgba(15, 118, 110, 0.42);
+        outline-offset: 4px;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+        z-index: 10;
+        transform: translateY(-160%);
+        background: var(--text);
+        color: var(--surface);
+        padding: 0.65rem 0.9rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+      }
+
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+
+      .site-header,
+      main,
+      .site-footer {
+        width: min(1120px, calc(100% - 2rem));
+        margin-inline: auto;
+      }
+
+      .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.25rem 0;
+      }
+
+      .brand {
+        color: var(--text);
+        font-size: 1rem;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-decoration: none;
+      }
+
+      .nav-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.35rem 1rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .nav-list a {
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .nav-list a:hover {
+        color: var(--text);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+        align-items: center;
+        gap: clamp(2rem, 6vw, 5rem);
+        min-height: calc(100vh - 92px);
+        padding: clamp(2.5rem, 8vw, 6rem) 0 clamp(2rem, 6vw, 4rem);
+      }
+
+      .eyebrow {
+        margin: 0 0 0.85rem;
+        color: var(--accent-dark);
+        font-size: 0.9rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.12;
+      }
+
+      h1 {
+        max-width: 11ch;
+        font-size: clamp(3rem, 8vw, 6rem);
+        letter-spacing: 0;
+      }
+
+      h2 {
+        font-size: clamp(1.75rem, 3vw, 2.45rem);
+        letter-spacing: 0;
+      }
+
+      h3 {
+        font-size: 1.15rem;
+      }
+
+      .hero-summary {
+        max-width: 58ch;
+        margin: 1.35rem 0 0;
+        color: var(--muted);
+        font-size: clamp(1.05rem, 2vw, 1.2rem);
+      }
+
+      .hero-actions,
+      .contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-top: 1.75rem;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        border: 1px solid var(--accent-dark);
+        border-radius: 0.5rem;
+        padding: 0.72rem 1rem;
+        background: var(--accent-dark);
+        color: var(--surface);
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .button:hover {
+        background: var(--accent);
+        color: var(--surface);
+      }
+
+      .button.secondary {
+        background: transparent;
+        color: var(--accent-dark);
+      }
+
+      .button.secondary:hover {
+        background: rgba(15, 118, 110, 0.1);
+        color: var(--accent-dark);
+      }
+
+      .profile-frame {
+        position: relative;
+        justify-self: center;
+        margin: 0;
+        width: min(100%, 390px);
+        aspect-ratio: 1;
+        overflow: hidden;
+        border: 1px solid rgba(29, 37, 37, 0.12);
+        border-radius: 0.5rem;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .profile-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .section {
+        padding: clamp(3rem, 7vw, 5rem) 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-header {
+        display: grid;
+        grid-template-columns: minmax(9rem, 0.35fr) minmax(0, 1fr);
+        gap: clamp(1rem, 4vw, 3rem);
+        align-items: start;
+        margin-bottom: 1.5rem;
+      }
+
+      .section-kicker {
+        margin: 0;
+        color: var(--accent-dark);
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .section-intro {
+        max-width: 66ch;
+        margin: 0.8rem 0 0;
+        color: var(--muted);
+      }
+
+      .about-grid,
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .card {
+        min-height: 100%;
+        border: 1px solid var(--line);
+        border-radius: 0.5rem;
+        background: rgba(255, 255, 255, 0.72);
+        padding: 1.2rem;
+      }
+
+      .card p {
+        margin: 0.75rem 0 0;
+        color: var(--muted);
+      }
+
+      .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        margin: 1rem 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tag-list li {
+        border: 1px solid rgba(15, 118, 110, 0.24);
+        border-radius: 999px;
+        padding: 0.32rem 0.65rem;
+        color: var(--accent-dark);
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .resume-panel,
+      .contact-panel {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 1.5rem;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 0.5rem;
+        background: var(--surface);
+        padding: clamp(1.2rem, 4vw, 2rem);
+      }
+
+      .resume-panel p,
+      .contact-panel p {
+        max-width: 68ch;
+        margin: 0.75rem 0 0;
+        color: var(--muted);
+      }
+
+      .contact-links {
+        margin-top: 0;
+      }
+
+      .site-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 2rem 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .site-footer p {
+        margin: 0;
+      }
+
+      @media (max-width: 820px) {
+        .site-header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav-list {
+          justify-content: flex-start;
+        }
+
+        .hero,
+        .section-header,
+        .resume-panel,
+        .contact-panel {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: auto;
+        }
+
+        .profile-frame {
+          justify-self: start;
+          width: min(100%, 330px);
+        }
+
+        .about-grid,
+        .project-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-links {
+          justify-content: flex-start;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .site-header,
+        main,
+        .site-footer {
+          width: min(100% - 1.25rem, 1120px);
+        }
+
+        .hero-actions,
+        .contact-links {
+          flex-direction: column;
+        }
+
+        .button {
+          width: 100%;
+        }
+
+        .site-footer {
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="site-header">
+      <a class="brand" href="#">Dawn R0mance</a>
+      <nav aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#resume">Resume</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="intro-title">
+        <div>
+          <p class="eyebrow">Computer science student</p>
+          <h1 id="intro-title">Dawn R0mance</h1>
+          <p class="hero-summary">
+            I build practical software with care for clarity, usability, and the
+            details that make a project reliable.
+          </p>
+          <div class="hero-actions" aria-label="Intro links">
+            <a class="button" href="#projects">View work</a>
+            <a class="button secondary" href="assets/cv.pdf">Download CV</a>
+          </div>
+        </div>
+        <figure class="profile-frame">
+          <img
+            src="assets/profile.jpg"
+            alt="Portrait of Dawn R0mance"
+            width="1844"
+            height="2248"
+          >
+        </figure>
+      </section>
+
+      <section class="section" id="about" aria-labelledby="about-title">
+        <div class="section-header">
+          <p class="section-kicker">About</p>
+          <div>
+            <h2 id="about-title">Focused on useful, understandable systems.</h2>
+            <p class="section-intro">
+              My work sits at the intersection of programming fundamentals,
+              human-centered design, and steady problem solving. I enjoy turning
+              ambiguous requirements into simple interfaces and maintainable code.
+            </p>
+          </div>
+        </div>
+        <div class="about-grid" aria-label="Strengths">
+          <article class="card">
+            <h3>Engineering</h3>
+            <p>
+              Building small, dependable programs with attention to structure,
+              correctness, and clear naming.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Design</h3>
+            <p>
+              Creating layouts that are responsive, readable, and easy to move
+              through on phones, tablets, and desktops.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Learning</h3>
+            <p>
+              Exploring algorithms, systems, and web technologies through
+              coursework and hands-on projects.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="projects" aria-labelledby="projects-title">
+        <div class="section-header">
+          <p class="section-kicker">Projects</p>
+          <div>
+            <h2 id="projects-title">Selected work</h2>
+            <p class="section-intro">
+              A compact snapshot of course projects, web work, and ongoing
+              technical practice.
+            </p>
+          </div>
+        </div>
+        <div class="project-grid">
+          <article class="card">
+            <h3>Coursework Portfolio</h3>
+            <p>
+              A collection of programming assignments focused on data structures,
+              algorithms, and software fundamentals.
+            </p>
+            <ul class="tag-list" aria-label="Coursework portfolio topics">
+              <li>Java</li>
+              <li>Algorithms</li>
+              <li>Testing</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Personal Website</h3>
+            <p>
+              A lightweight GitHub Pages site designed to present background,
+              projects, and resume information without a build system.
+            </p>
+            <ul class="tag-list" aria-label="Personal website topics">
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>Accessibility</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Ongoing Learning</h3>
+            <p>
+              Continuing to practice problem solving, build habits, and document
+              progress through small software projects.
+            </p>
+            <ul class="tag-list" aria-label="Ongoing learning topics">
+              <li>Research</li>
+              <li>Build</li>
+              <li>Iterate</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="resume" aria-labelledby="resume-title">
+        <div class="resume-panel">
+          <div>
+            <p class="section-kicker">Resume</p>
+            <h2 id="resume-title">Download the latest CV.</h2>
+            <p>
+              View the resume for a concise overview of education, experience,
+              technical skills, and selected work.
+            </p>
+          </div>
+          <a class="button" href="assets/cv.pdf">Open CV</a>
+        </div>
+      </section>
+
+      <section class="section" id="contact" aria-labelledby="contact-title">
+        <div class="contact-panel">
+          <div>
+            <p class="section-kicker">Contact</p>
+            <h2 id="contact-title">Let's connect.</h2>
+            <p>
+              The best place to find current projects and activity is GitHub.
+            </p>
+          </div>
+          <div class="contact-links" aria-label="Contact links">
+            <a class="button" href="https://github.com/dawn-r0mance">GitHub</a>
+            <a class="button secondary" href="#resume">Resume</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 Dawn R0mance</p>
+      <p>Built with static HTML and CSS for GitHub Pages.</p>
+    </footer>
+  </body>
+</html>
